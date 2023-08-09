@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    {% load static %}	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .leftSide {
+    
+            width: 200px;
+            height: auto;
+            margin: 30px;
+            border-radius: 15px;
+            padding: 8px;
+            text-align: left;
+            background-color: white;
+            border: 2px solid grey;
+    
+    
+        }
+    
+        .rightSide {
+            width: 250px;
+            border: 2px solid gray;
+            height: auto;
+            margin: 30px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 8px;
+            text-align: left;
+    
+        }
+    
+        .header {
+            margin: 10px;
+            padding: 10px;
+            background-color: salmon;
+            width: fit-content;
+            height: 100px;
+            border-radius: 10px;
+            padding-left: 35px;
+            display: flex;
+    
+        }
+    
+    
+    
+        .wrapper {
+            width: 1080px;
+            height: auto;
+            border: 2px solid red;
+        }
+    
+        .flexbox {
+            display: flex;
+            align-content: space-between;
+        }
+    
+        body {
+            background-color: peachpuff;
+    
+            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%230f0e0f' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    
+        #columns {
+            display: flex;
+        }
+    
+        a {
+            display: inline-block;
+            margin-left: 1000px;
+        }
+    
+        .moveRight {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+
+<div class="moveRight">
+    <a href="/logout">Logout</a>
+</div>
+<div class='wrapper'>
+
+    <div class="header">
+        <img style = "height: 80px; width: 80px;"src="{% static 'images/default.jpg' %}" />
+        <h2>Welcome, {{ user.first_name  }} {{ user.last_name  }} </h2>
+
+        <h3>Location: {{ user.city  }}, {{ user.state  }}</h3>
+
+    </div>>
+
+    <body>
+        <div id="columns">
+            <div class="flexbox">
+                <div class="leftSide">
+                    <p>{{ user.first_name }}'s Profile:</p>
+                    <p>Friends</p>
+                    <p>Reviews: {{user.reviews.count}}</p>
+                    <!-- <p>Compliments</p>
+                    <p>Tips</p>
+                    <p>Bookmarks</p>
+                    <p>Collections</p>
+                    <p>Check-ins</p>
+                    <p>Gulp Cash Back</p>
+                    <p>Events</p>
+                    <p>Order History</p>
+                    <p>Check-ins</p>
+                    <p>Followings</p> -->
+
+
+                </div>
+                <div class="flexbox">
+                    <div class="rightSide">
+                        <p>Notifications</p>
+                        <p>Recent Activity</p>
+                    </div>
+                </div>
+
+                <div class="flexbox">
+                    <div class="rightSide">
+                        {{ user.first_name }} {{ user.last_name  }}'s Dashboard
+                        <hr>
+                        <br>
+                        {{ user.city }}, {{ user.state }}
+                        <br>
+                        <br>
+                        <h3> Reviews:</h3>
+                        <hr>
+                        {% for one_review in all_reviews  %}
+
+                        {{ user.reviews }}
+
+                        {% endfor  %}
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <form action="/update_profile_image" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+
+            <div id="mari">
+                <form action="/edit" method="POST">
+                    {% csrf_token %}
+                    <div class="spaces">First Name:<input type="text" name="first_name" value="{{ first }}"></div>
+                    {% for message in messages %}
+                        {% if message.tags == 'first_name error' %}
+                            <span style="color: red">{{ message }}</span>
+                        {% endif %}
+                    {% endfor %}<br>
+        
+                    <div class="spaces">Last Name:<input type="text" name="last_name" value="{{ last }}"></div>
+                    {% for message in messages %}
+                        {% if message.tags == 'last_name error' %}
+                            <span style="color: red">{{ message }}</span>
+                        {% endif %}
+                    {% endfor %}<br>
+        
+                <div class="spaces">City:<input type="text" name="city" value="{{ city }}"></div>
+                    {% for message in messages %}
+                        {% if message.tags == 'first_name error' %}
+                            <span style="color: red">{{ message }}</span>
+                        {% endif %}
+                    {% endfor %}<br>
+        
+                <div class="spaces">State:<input type="text" name="state" value="{{ state }}"></div>
+                    {% for message in messages %}
+                        {% if message.tags == 'first_name error' %}
+                            <span style="color: red">{{ message }}</span>
+                        {% endif %}
+                    {% endfor %}<br>
+        
+                    <input type="submit" id="done" value="Update">
+                </form>
+            </div>
+    </body>
+</div>
+
+<!DOCTYPE html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            background-color: salmon;
+            color: peachpuff;
+            font-size: 20px;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #login {
+            display: flex;
+            justify-content: space-evenly;
+            width: 200px;
+            color: peachpuff;
+        }
+
+        .box {
+            padding: 20px;
+        }
+
+        #reviews {
+            display: flex;
+            justify-content: space-evenly;
+            width: 50%;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="nav">
+            Room 42
+            <div id="login">
+                <a href="/login">Login</a>
+                <a href="/login">Sign Up</a>
+            </div>
+        </div>
+        <div id="main">
+            <div class="box">
+                <h1>{{ onerest.name }}</h1>
+                <!-- {{ user.first_name }} -->
+                Reviews:
+                {% for rev in review %}
+                <div id="user">
+                    {{ rev.user.first_name }} {{ rev.user.last_name }}<br>
+                    {{ rev.user.city }}, {{ rev.user.state }}<br>
+                </div>
+                <div id="rev">{{ rev.rating}}<br>{{ rev.review}}</div>
+                <br><br>
+                {% if rev.user.id == user.id %}
+                <a href="/delete/{{onerest.id}}/{{rev.id}}">Delete</a>
+                {% endif %}
+
+                {% endfor %}
+                <br><br>
+
+                <a href="/restaurant/{{onerest.id}}/{{user.id}}/addreview">Write a Review</a>
+                <a href="/logout">Logout</a>
+            </div>
+
+</body>
+
+</html>

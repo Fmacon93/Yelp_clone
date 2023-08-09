@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Results from search
+
+    <ul>
+        {% for city in object_list %}
+        <li>
+            {{ city.name }}, {{ city.state }}
+        </li>
+        {% endfor %}
+
+
+
+        HELNJLKA:SL Search for this thing!
+    <form action="/search" method='get'>
+        <input name='q' type='text' placeholder='Search...'>
+        <button type='submit'>Go!</button>
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .leftSide {
+
+            width: 155px;
+            height: 225px;
+            display: inline-block;
+            margin-right: 30px;
+            border-radius: 15px;
+            padding: 8px;
+        }
+
+        .rightSide {
+            border: 2px solid gray;
+            height: 850px;
+            display: inline-block;
+            margin-left: 30px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 8px;
+        }
+        
+
+        .header {
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            width: 500px;
+            height: 25px;
+            border-radius: 10px;
+            padding-left: 35px;
+
+        }
+
+        .wrapper {
+            width: 1280px;
+            height: auto;
+            border: 2px solid red;
+        }
+
+        body {
+            background-color: #9a0303;
+            background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%230f0e0f' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        a {
+            display: inline-block;
+            margin-left: 1000px;
+        }
+
+        .moveRight {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .formSize{ 
+            width: 300px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="leftSide">
+
+        <img src="food.jpg" alt="User photo">
+
+
+    </div>
+
+
+
+
+
+    <div class="moveRight">
+        <a href="/logout">Logout</a>
+    </div>
+    <wrapper>
+
+        <div class="formSize">
+        <h2> Register Below</h2>
+        <form action="/addUser" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="first_name" class="form-control" id="first_name" aria-describedby="first_name"
+                    placeholder="First name">
+
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="last_name" class="form-control" id="last_name" aria-describedby="last_name"
+                    placeholder="Last Name">
+
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="city" class="form-control" id="city" aria-describedby="city" placeholder="City">
+
+            </div>
+
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="state" class="form-control" id="state" aria-describedby="state" placeholder="State">
+
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" aria-describedby="password"
+                    placeholder="Password">
+
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="confirm_password" class="form-control" id="confirm_password"
+                    aria-describedby="confirm_password" placeholder="Confirm Password">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+
+
+    </wrapper>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

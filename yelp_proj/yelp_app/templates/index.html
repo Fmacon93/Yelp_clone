@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0px auto;
+        }
+
+        .wrapper {
+            background-color: gray;
+        }
+
+        .header {
+            background-image: url("header.jpg");
+            width: 100vw;
+            background-size: auto;
+            background-repeat: no;
+
+        }
+
+        .header a {
+            color: wheat;
+            background-color: darkslategray;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="d-flex justify-content-between">
+
+                <a href="/newReview">Write a Review</a>
+                <a href="/">Events</a>
+                <a href="/">Talk</a>
+                <!-- IF USER IS NOT LOGGED IN -->
+                <h2>{{request.session.user_id}}</h2>
+                {% if request.session.user_id %}
+                <div class='bg-secondary'>
+                    <a href="/user/{{request.session.user_id}}">My Account</a>
+                    <a href="/logout">Logout</a>
+                </div>
+                {% else %}
+                <div>
+                    <a href="/login">Log In</a>
+                    <a class="btn bg-white" style="border: 1px solid black;" href="/login">Sign Up</a>
+                </div>
+                {% endif %}
+            </div>
+            <h2 class="text-center bg-light border-dark">Room 42</h2>
+            <div class="row">
+                <form action="/search" method='get'>
+                    <input name='q' type='text' placeholder='Search...'>
+                    <button type='submit'>Go!</button>
+                </form>
+
+
+                <form action="/search" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{user.id}}" name="user_id">
+                    <label class='bg-light' for="find">Find:</label>
+                    <input type='text' name='name' class="form-control" value="takeout, delivery, food">
+                    <input class="btn btn-light" type='submit' value='Go'>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a class='btn-danger' href="/restaurants">All Restaurants</a>
+    <a class='btn-danger' href="/add_restaurant">Add Restaurant</a>
+    {% for rest in all_the_restaurants %}
+    {{ rest.name }}
+    <a class='btn-danger' href="/restaurant/{{rest.id}}">Restaurant</a>
+    {% endfor %}
+</body>
+
+</html>

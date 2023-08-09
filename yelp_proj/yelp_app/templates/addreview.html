@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <h1>{{ onerest.name }}</h1>
+
+    <form action="/add_review/{{onerest.id}}/{{user.id}}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        Rating:
+        <select name="rating" id="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br><br>
+        <textarea id="post" name="review" rows="5"
+            cols="40">{{ user.first_name }}, write your review here.</textarea><br><br>
+
+        {{ form.as_p }} <input type="submit" value="Submit"> </form> <br>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Restaurant</title>
+
+    <style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    body {
+        padding:20px;
+        background-color: salmon;
+        color: peachpuff;
+        font-size: 20px;
+    }
+    #wrapper {
+        margin: 0px auto;
+    }
+
+    form {
+        width:300px;
+        margin: 20px;
+
+    }
+    
+    .spaces {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    input#done {
+        margin-left: 20%;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: wheat;
+        color: salmon;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1> Add a Restaurant </h1>
+        <form action="/makerestaurant" method="POST">
+            {% csrf_token %}
+            <div class="spaces">Name <input type="text" name="name"></div><br>
+            {% for message in messages %}
+                {% if message.tags == 'name error' %}
+                    <span style="color: red">{{ message }}</span>
+                {% endif %}
+            {% endfor %}<br>
+            <div class="spaces">Owner <input type="text" name="owner"></div><br>
+            {% for message in messages %}
+                {% if message.tags == 'owner error' %}
+                    <span style="color: red">{{ message }}</span>
+                {% endif %}
+            {% endfor %}<br>
+            <div class="spaces">Address <input type="text" name="address"></div><br>
+            {% for message in messages %}
+                {% if message.tags == 'address error' %}
+                    <span style="color: red">{{ message }}</span>
+                {% endif %}
+            {% endfor %}<br>
+            <div class="spaces">City <input type="text" name="city"></div><br>
+            {% for message in messages %}
+                {% if message.tags == 'city error' %}
+                    <span style="color: red">{{ message }}</span>
+                {% endif %}
+            {% endfor %}<br>
+            <div class="spaces">State
+                <select name="state" id="state">
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                    <option value="DC">DC</option>
+                </select>
+            </div><br>
+            <div class="spaces">Category <input type="text" name="category"></div><br>
+            {% for message in messages %}
+                {% if message.tags == 'category error' %}
+                    <span style="color: red">{{ message }}</span>
+                {% endif %}
+            {% endfor %}<br><br>
+            <div class="spaces">Description<textarea id="comment" name="desc" rows="5" cols="46"></textarea>
+                {% for message in messages %}
+                    {% if message.tags == 'desc error' %}
+                        <span style="color: red">{{ message }}</span>
+                    {% endif %}
+                {% endfor %}<br>
+                <input type="submit" id="done" value="Add">
+        </form>
+    </div>
+</body>
+
+</html>
